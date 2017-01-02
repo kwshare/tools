@@ -1,5 +1,5 @@
 #!/bin/bash
-#当发现mysql挂了之后， 重新启动mysql
+#当发现mysql挂了之后， 重新启动mysql 
 #需要配合cron
 pidof mysqld >/dev/null
 if [ $? -eq 0 ]
