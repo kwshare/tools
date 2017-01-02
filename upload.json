@@ -1,0 +1,8 @@
+{
+    "src_dir"       :   "/root/universe/上传目录",
+    "access_key"    :   "七牛的ak",
+    "secret_key"    :   "骑牛的sk",
+    "bucket"        :   "目标空间名字",
+    "up_host"       :   "http://up.qiniug.com"
+
+}
