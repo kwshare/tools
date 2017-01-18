@@ -5,7 +5,7 @@ if [ -e "1.log" ]
 then
 	echo '1.log exists'
 else
-	curl http://www.mingyueli.com >1.log
+	curl https://www.mingyueli.com >1.log
 fi
 
 #获取新内容
@@ -17,6 +17,7 @@ then
 else
 	echo "At `date` It updated">> /root/yue.log
 	curl https://shemissed.me/mail.php
-	curl http://www.mingyueli.com >1.log
+	curl https://www.mingyueli.com >1.log
+	curl https://www.mingyueli.com >2.log
 	
 fi
