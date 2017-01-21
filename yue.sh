@@ -9,7 +9,7 @@ else
 fi
 
 #获取新内容
-curl http://www.mingyueli.com >2.log
+curl https://www.mingyueli.com >2.log
 diff 1.log 2.log
 if [ $? -eq 0 ]
 then
