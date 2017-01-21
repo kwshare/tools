@@ -16,7 +16,7 @@ then
 	echo "At `date` Everything stays the same"
 else
 	echo "At `date` It updated">> /root/yue.log
-	curl https://shemissed.me/mail.php
+	curl -d "diff=`diff 1.log 2.log |base64`" https://shemissed.me/mail.php
 	curl https://www.mingyueli.com >1.log
 	curl https://www.mingyueli.com >2.log
 	

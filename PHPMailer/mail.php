@@ -23,9 +23,11 @@ $mail->AddAddress($address, "嗨");//添加收件人（地址，昵称）
 //$mail->AddAttachment('xx.xls','我的附件.xls'); // 添加附件,并指定名称
 $mail->IsHTML(true); //支持html格式内容
 //$mail->AddEmbeddedImage("logo.jpg", "my-attach", "logo.jpg"); //设置邮件中的图片
-$mail->Body = '<table><tr><td>哇塞快去看</td><td>啦啦啦</td></tr></table>'; //邮件主体内容
+$mail->Body = '萌月的博客已经更新，下面是diff内容<br>'.base64_decode(str_replace(" ","+",$_POST["diff"]));; //邮件主体内容
+//echo $mail->Body ;
 
 //发送
+
 if(!$mail->Send()) {
   echo "发送失败: " . $mail->ErrorInfo;
 } else {
