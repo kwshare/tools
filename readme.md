@@ -6,6 +6,7 @@
 备份网站文件并上传到七牛云
 需要七牛官方qshell工具的支持，参考`upload.json`和[七牛官方文档](https://support.qiniu.com/question/198313) 
 建议配合cron
+已经增加Google Drive、腾讯云COS支持，请查看对应的官方文档
 ##2. compress_log.sh
 压缩日志文件，至于是啥日志文件，你说了算。
 ##3. relay.sh
