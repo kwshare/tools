@@ -8,12 +8,13 @@
 建议配合cron，`upload.json`可能需要一些更改
 已经增加Google Drive、腾讯云COS支持，请查看对应的官方文档
 ##2. compress_log.sh
-压缩日志文件，至于是啥日志文件，你说了算。
+压缩日志文件，至于是啥日志文件，你说了算。其实有`logrotate`就够了嘛
 ##3. relay.sh
-中转文件至七牛云的一个小脚本，非常简单，需要配合qshell，并且推荐+x丢到`/bin`
+中转文件至七牛云的一个小脚本，非常简单，需要配合qshell，并且推荐+x丢到`/bin`、`sbin`
 ##4. restart_service.sh
 监测某个进程是否存在、如果不存在则将其重启<br>
 目前主要用于监测MySQL，建议配合cron
+小蜗牛提醒[`mysqld_safe`](http://mingyueli.com/cn/2017/03/07/mysqld-mysqld-safe/)也是个很好的选择
 ##5. PHPMailer
 主要用于发送邮件，已经配置好了，只需要编辑`mail.php`的配置，之后curl即可发送邮件。
 ##6. yue.sh
