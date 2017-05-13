@@ -27,7 +27,7 @@
 **服务器至少要有jre、只可以对有一台服务器的用户进行快照操作**
 注意：有一次不知道为何竟然没有删除上一个快照，再也没能重现这个问题。
 ## 9. WordPressPdfMaker.py ##
-这是一个用来抓取WordPress博客文章为pdf的Python脚本。需要requests、BeautifulSoup、pdfkit和wmhtml2pdf，都可以使用pip安装
+这是一个用来抓取WordPress博客文章为pdf的Python脚本。需要requests、BeautifulSoup、pdfkit和wmhtml2pdf，都可以使用pip安装。使用的是Python 2.7
 注意：
 1. 由于Windows文件名限制不能有/?等符号，在Windows下运行可能会导致失败；
 2. 目前仅仅在我的马甲站上测试通过；
