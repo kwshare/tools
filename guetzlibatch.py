@@ -5,7 +5,7 @@ import os
 import psutil
 import time
 
-taskList = [item for item in os.listdir('./') if 'jpg' in item]
+taskList = [item for item in os.listdir('./') if 'jpg' or 'jpeg' in item]
 processCount = psutil.cpu_count(logical=True)
 parallelJobs = min(len(taskList), processCount)
 
