@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="onekey-snapshot:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/onekey_snapshot_jar</output-path>
+    <root id="archive" name="onekey-snapshot.jar">
+      <element id="module-output" name="onekey-snapshot" />
+    </root>
+  </artifact>
+</component>
