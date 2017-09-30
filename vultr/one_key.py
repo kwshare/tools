@@ -77,7 +77,7 @@ def create(server_id):
 if __name__ == '__main__':
     get('snapshot/list', True)
     snapshot_id = json.loads(result.getvalue())
-    snapshot_id = snapshot_id.get(snapshot_id.keys()[0]).get('SNAPSHOTID')
+    snapshot_id = snapshot_id.get(snapshot_id.keys()[-1]).get('SNAPSHOTID')
     destroy(snapshot_id)
     print 'destroyed... '
     create(SERVER_ID)
