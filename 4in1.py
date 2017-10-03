@@ -8,7 +8,7 @@ import paramiko
 
 def ssh(host=None, pwd=None, cmd=None):
     connector = paramiko.SSHClient()
-    connector.set_missing_host_key_policy(paramiko.AutoAddPolicy)
+    connector.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     connector.connect(hostname=host, username='root', password=pwd)
     stdin, stdout, err = connector.exec_command(cmd)
     print ' -- ', host, ' -- \n', stdout.read()
