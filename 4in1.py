@@ -4,6 +4,7 @@
 # 4 in one snapshot
 
 import paramiko
+import threading
 
 
 def ssh(host=None, pwd=None, cmd=None):
@@ -15,7 +16,15 @@ def ssh(host=None, pwd=None, cmd=None):
     connector.close()
 
 
-ssh('1.com', '476f44902', 'java -jar /home/qcloud.jar')
-ssh('2.com', '9991ec5a1c72', 'java -jar /home/encore.jar')
-ssh('3.com', 'b7bc6f53100e0', 'java -jar /home/big.jar')
-ssh('4.com', '6416f902', 'python /home/one_key.py')
+t = threading.Thread(target=ssh,
+                     args=('shemissed.me', '641b44902', 'java -jar /home/qcloud.jar'))
+t.start()
+t = threading.Thread(target=ssh,
+                     args=('mingyueli.com', '39a1c72', 'java -jar /home/encore.jar'))
+t.start()
+t = threading.Thread(target=ssh,
+                     args=('mingyue.tech', 'b7bc0e0', 'java -jar /home/big.jar'))
+t.start()
+t = threading.Thread(target=ssh,
+                     args=('shemissed.me', '641b44902', 'python /home/one_key.py'))
+t.start()
