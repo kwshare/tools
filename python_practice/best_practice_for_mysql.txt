@@ -1,19 +1,17 @@
 'qmark'
-
 >> > cursor.execute("SELECT spam FROM eggs WHERE lumberjack = ?", (lumberjack,))
+
 'numeric'
-
 >> > cursor.execute("SELECT spam FROM eggs WHERE lumberjack = :1", (lumberjack,))
+
 'named'
-
 >> > cursor.execute("SELECT spam FROM eggs WHERE lumberjack = :jack", {'jack': lumberjack})
+
 'format'
-
 >> > cursor.execute("SELECT spam FROM eggs WHERE lumberjack = %s", (lumberjack,))
+
 'pyformat'
-
 >> > cursor.execute("SELECT spam FROM eggs WHERE lumberjack = %(jack)s", {'jack': lumberjack})
-
 
 >> > clientlibrary.paramstyle
 'pyformat'
