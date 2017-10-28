@@ -14,7 +14,7 @@
 ## 4. restart_service.sh
 监测某个进程是否存在、如果不存在则将其重启<br>
 目前主要用于监测MySQL，建议配合cron
-小蜗牛提醒[`mysqld_safe`](https://www.mingyueli.com/2017/03/07/mysqld-mysqld-safe/)也是个很好的选择
+小蜗牛提醒[`mysqld_safe`](https://www.mingyueli.com/2017/03/07/mysqld-mysqld-safe/)也是个很好的选择。
 ## 5. PHPMailer
 主要用于发送邮件，已经配置好了，只需要编辑`mail.php`的配置，之后curl即可发送邮件。
 ## 6. change.sh
