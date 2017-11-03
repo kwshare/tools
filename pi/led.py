@@ -1,0 +1,22 @@
+#!/usr/bin/python
+# coding:utf-8
+
+# pi - led.py
+# 2017/10/31 20:46
+# 
+
+__author__ = 'Benny <benny@bennythink.com>'
+
+import RPi.GPIO as GPIO
+import time
+
+# BOARD编号方式，基于插座引脚编号
+GPIO.setmode(GPIO.BOARD)
+# 输出模式
+GPIO.setup(11, GPIO.OUT)
+
+while True:
+    GPIO.output(11, GPIO.HIGH)
+    time.sleep(1)
+    GPIO.output(11, GPIO.LOW)
+    time.sleep(1)
