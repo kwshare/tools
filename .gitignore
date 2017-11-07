@@ -2,3 +2,7 @@
 vultr/\.idea/
 
 *.pyc
+
+pi/\.idea/
+
+python_practice/\.idea/
