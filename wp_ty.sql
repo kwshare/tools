@@ -2,8 +2,9 @@ SELECT
   post_title,
   meta_value
 FROM wp_posts, wp_postmeta
-WHERE wp_posts.ID = wp_postmeta.post_id AND meta_key = 'views'
-ORDER BY meta_value
+WHERE wp_posts.ID = wp_postmeta.post_id AND post_status = 'publish' AND meta_key = 'views' AND
+      (post_type = 'post' OR post_type = 'page')
+ORDER BY cast(meta_value AS SIGNED) DESC 
 
 
 SELECT
