@@ -46,17 +46,21 @@ def progress_bar(percentage):
 
 
 def final_check():
-    total = len([pro.name() for pro in psutil.process_iter() if 'guetzli' in pro.name()])
+    # Fuzzy...
+    total = len([pro.name() for pro in psutil.process_iter() if 'guetzli' in pro.name()]) + 1
+    count = total - 1
 
     while True:
         current_jobs = len([pro.name() for pro in psutil.process_iter() if 'guetzli' in pro.name()])
         if current_jobs == 0:
-            print '** Job completed. **'
+            print '-- Job completed. --'
             break
         else:
-            print '** Please wait for final processing... **'
-            progress_bar(round((total - current_jobs) * 1.0 / total, 2))
-        time.sleep(3)
+            if current_jobs != total:
+                print '-- Please wait for final processing... --'
+                progress_bar(round((count - current_jobs) * 1.0 / count * 100, 2))
+                total = total - 1
+        time.sleep(1)
 
 
 if __name__ == '__main__':
