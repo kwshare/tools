@@ -25,7 +25,11 @@ def op(task_list):
         if not task_list:
             break
         elif current_jobs < parallel_jobs:
-            subprocess.Popen('guetzli %s %s' % (task_list[0], task_list[0]))
+            cmd = 'guetzli "%s" "%s"' % (task_list[0], task_list[0])
+            if os.name == 'posix':
+                os.system(cmd + '&')
+            else:
+                subprocess.Popen(cmd)
             print '** guetzli is processing %s **' % task_list[0]
             task_list.pop(0)
         else:
