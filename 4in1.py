@@ -20,7 +20,7 @@ t = threading.Thread(target=ssh,
                      args=('shemissed.me', '641b44902', 'java -jar /home/qcloud.jar'))
 t.start()
 t = threading.Thread(target=ssh,
-                     args=('mingyueli.com', '39a1c72', 'java -jar /home/encore.jar'))
+                     args=('www.mingyueli.com', '39a1c72', 'java -jar /home/encore.jar'))
 t.start()
 t = threading.Thread(target=ssh,
                      args=('mingyue.tech', 'b7bc0e0', 'java -jar /home/big.jar'))

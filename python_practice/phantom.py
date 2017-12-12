@@ -12,10 +12,14 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 driver = webdriver.PhantomJS()
-driver.get('https://www.bennythink.com/ubuntumate-raspberry2.html')
-driver.find_element_by_xpath('//*[@id="Addlike"]').click()
-# this doesn't work..?
-driver.delete_all_cookies()
-driver.page_source()
+
+for i in range(5):
+    driver.get('https://www.bennythink.com')
+    driver.page_source()
+    #driver.find_element_by_xpath('//*[@id="Addlike"]').click()
+    driver.find_element_by_xpath('//*[@id="menu-item-1005"]/a').click()
+    # this doesn't work..?
+    #driver.delete_all_cookies()
+    #driver.page_source()
 driver.quit()
 
