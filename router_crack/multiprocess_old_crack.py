@@ -41,7 +41,8 @@ def old_crack():
 
     p.close()
     p.join()
-
+    f1.close()
+    f2.close()
 
 if __name__ == '__main__':
     print old_crack()
