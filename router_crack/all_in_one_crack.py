@@ -93,6 +93,7 @@ def old_crack():
     f1.close()
     f2.close()
 
+
 def test_security_encode():
     assert '0KcgeXhc9TefbwK' == security_encode('123456')
 
