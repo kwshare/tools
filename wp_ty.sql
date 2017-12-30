@@ -12,7 +12,7 @@ ORDER BY cast(meta_value AS SIGNED) DESC
 SELECT
   title,
   VIEWS
-FROM typecho_contents
+FROM bk_contents
 WHERE type = 'post' OR type = 'page'
 ORDER BY views DESC
 
@@ -41,15 +41,15 @@ SELECT
 
 -- comments count Typecho
 SET @total = (SELECT count(*)
-              FROM typecho_comments
+              FROM bk_comments
               WHERE status = 'approved');
 
 SET @visitor = (SELECT count(*)
-                FROM typecho_comments
+                FROM bk_comments
                 WHERE status = 'approved' AND authorId != 1);
 
 SET @blogger = (SELECT count(*)
-                FROM typecho_comments
+                FROM bk_comments
                 WHERE status = 'approved' AND authorId = 1);
 
 
