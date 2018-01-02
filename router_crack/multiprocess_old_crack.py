@@ -14,8 +14,8 @@ from measurement import exe_time
 
 
 def old_login(username, password):
-    r = s.get('http://192.168.7.1',
-                     headers={'Authorization': 'Basic ' + b64encode('%s:%s' % (username, password))})
+    r = requests.get('http://192.168.7.1',
+              headers={'Authorization': 'Basic ' + b64encode('%s:%s' % (username, password))})
     if r.status_code == 200:
         print 'the username:password is %s:%s' % (username, password)
 
@@ -46,5 +46,4 @@ def old_crack():
 
 
 if __name__ == '__main__':
-    s = requests.session()
     print old_crack()

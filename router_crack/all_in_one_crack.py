@@ -101,4 +101,4 @@ def test_security_encode():
 
 if __name__ == '__main__':
     s = requests.session()
-    print new_crack()
+    print old_crack()
