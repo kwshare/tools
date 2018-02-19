@@ -4,81 +4,40 @@
 # delete the oldest snapshot
 # and create a new one
 
-import pycurl
-import certifi
-import logging
-import StringIO
 import json
-import sys
+import requests
 
-API_KEY = 'Your key'
-SERVER_ID = 'Your server ID'
+API_KEY = 'XMAJNQ'
+BLOG_SUBID = '7145202'
+SS_SUBID = '13152978'
 BASE = 'https://api.vultr.com/v1/'
-result = StringIO.StringIO()
-
-c = pycurl.Curl()
-c.setopt(pycurl.CAINFO, certifi.where())
 
 
-def get(url, api=False, data=False):
-    """
-    send get request
-    :param url: action, i.e. server/restart
-    :param api: Authentication require, boolean
-    :param data: get params
-    :return: None
-    """
-    c.setopt(pycurl.WRITEFUNCTION, result.write)
-    if data:
-        c.setopt(pycurl.URL, BASE + url + '?' + data)
-    else:
-        c.setopt(pycurl.URL, BASE + url)
-    if api:
-        c.setopt(pycurl.HTTPHEADER, ['API-Key:' + API_KEY])
-    c.perform()
-    if c.getinfo(pycurl.HTTP_CODE) != 200:
-        print
-        logging.error('Request failed')
-        sys.exit(result.getvalue())
+def _list(url):
+    return requests.get(BASE + url, headers={'API-Key': API_KEY}).text
 
 
-def post(url, api=False, data=False):
-    """
-    send post request
-    :param url: action, i.e. server/restart
-    :param api: Authentication require, boolean
-    :param data: post header
-    :return: None
-    """
-    c.setopt(pycurl.URL, BASE + url)
-    c.setopt(pycurl.CUSTOMREQUEST, 'POST')
-    c.setopt(pycurl.WRITEFUNCTION, result.write)
-
-    if api:
-        c.setopt(pycurl.HTTPHEADER, ['API-Key:' + API_KEY])
-    if data:
-        c.setopt(pycurl.POSTFIELDS, data)
-
-    c.perform()
-    if c.getinfo(pycurl.HTTP_CODE) != 200:
-        print
-        logging.error('Request failed')
-        sys.exit(result.getvalue())
+def destroy(url, snap_id):
+    return requests.post(BASE + url, headers={'API-Key': API_KEY}, data={'SNAPSHOTID': snap_id}).text
 
 
-def destroy(snap_id):
-    post('snapshot/destroy', True, 'SNAPSHOTID=' + snap_id)
+def create(url, server_id, desc):
+    return requests.post(BASE + url, headers={'API-Key': API_KEY}, data={'SUBID': server_id, 'description': desc}).text
 
 
-def create(server_id):
-    post('snapshot/create', True, 'SUBID=' + server_id)
+def parse_snap(content, _type):
+    return [key for key in content if content[key]['description'] == _type][0]
+
+
+def process(name):
+    snap_list = _list('snapshot/list')
+    sub_id = BLOG_SUBID if name == 'blog' else SS_SUBID
+
+    to_be_delete = parse_snap(json.loads(snap_list), name)
+    print(destroy('snapshot/destroy', to_be_delete))
+    print(create('snapshot/create', sub_id, name))
 
 
 if __name__ == '__main__':
-    get('snapshot/list', True)
-    snapshot_id = json.loads(result.getvalue())
-    snapshot_id = snapshot_id.get(snapshot_id.keys()[0]).get('SNAPSHOTID')
-    destroy(snapshot_id)
-    print 'destroyed... '
-    create(SERVER_ID)
-    print 'created... ', result.getvalue()
+    process('blog')
+    process('shadowsocks')
