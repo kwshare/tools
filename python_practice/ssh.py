@@ -10,7 +10,7 @@ def traditional():
     ssh.connect(hostname='192.168.56.101', username='root', password='96')
 
     stdin, stdout, stderr = ssh.exec_command('ls')
-    print stdout.read()
+    print(stdout.read())
     ssh.close()
 
 
@@ -21,7 +21,7 @@ def transport():
     ssh = paramiko.SSHClient()
     ssh._transport = trans
     stdin, stdout, stderr = ssh.exec_command('df -h')
-    print stdout.read()
+    print(stdout.read())
     ssh.close()
 
 
