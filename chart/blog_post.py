@@ -9,7 +9,7 @@ __author__ = 'Benny <benny@bennythink.com>'
 
 import plotly
 import plotly.graph_objs as go
-import mysql.connector
+import pymysql
 import time
 from datetime import datetime
 
@@ -24,11 +24,18 @@ def draw(x, y, fn):
     )
 
     fig = go.Figure(data=data, layout=layout)
-    plotly.offline.plot(fig, data, filename='%s.html' % fn)
+    # not include js
+    plotly.offline.plot(fig, data, include_plotlyjs=False, filename='%s.html' % fn)
+    # add js here.
+    with open('%s.html' % fn, 'r+')as f:
+        f.seek(36)
+        content = f.read()
+        f.seek(36)
+        f.write('<script src="https://cdn.bootcss.com/plotly.js/1.38.0/plotly-basic.min.js"></script>' + content)
 
 
 def wp_analysis():
-    con = mysql.connector.connect(user='root', password='root', host='127.0.0.1', database='wp')
+    con = pymysql.connect(user='root', password='root', host='127.0.0.1', database='wordpress')
     cur = con.cursor()
     cmd = "SELECT post_date FROM wp_posts WHERE post_type='post' AND post_status='publish'"
     cur.execute(cmd)
@@ -37,7 +44,7 @@ def wp_analysis():
 
 
 def ty_analysis():
-    con = mysql.connector.connect(user='root', password='root', host='127.0.0.1', database='ty')
+    con = pymysql.connect(user='root', password='root', host='127.0.0.1', database='hi')
     cur = con.cursor()
     cmd = "SELECT created FROM bk_contents WHERE type = 'post' AND status = 'publish' ORDER BY created"
     cur.execute(cmd)
