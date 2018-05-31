@@ -1,0 +1,9 @@
+{
+  "method": "rsa",
+  "type": "decrypt",
+  "public_key": "pub.pem",
+  "private_key": "pri.pem",
+  "password": "plaintext password for private key.",
+  "raw_file": "absolute file path to be encrypted or decrypted",
+  "cook_file": "absolute file path to be encrypted or decrypted"
+}

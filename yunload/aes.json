@@ -1,0 +1,8 @@
+{
+  "method": "aes",
+  "type": "decrypt",
+  "iv": "16byte(128bit) iv",
+  "password": "plaintext password,will be hash to 32byte",
+  "raw_file": "absolute file path to be encrypted or decrypted",
+  "cook_file": "absolute file path to be encrypted or decrypted"
+}
