@@ -13,11 +13,12 @@ import json
 
 
 def draw(x, y, fn):
-    data = [go.Bar(
+    # go.Bar, go.Scatter
+    data = [go.Scatter(
         x=x,
         y=y
     )]
-    layout = go.Layout(title='Status Report', )
+    layout = go.Layout(title='Status Report')
 
     fig = go.Figure(data=data, layout=layout)
     plotly.offline.plot(fig, data, filename='%s.html' % fn)
