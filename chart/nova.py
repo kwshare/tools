@@ -21,7 +21,8 @@ def draw(x, y, fn):
     layout = go.Layout(title='Status Report')
 
     fig = go.Figure(data=data, layout=layout)
-    plotly.offline.plot(fig, data, filename='%s.html' % fn)
+    # <script src="https://cdn.bootcss.com/plotly.js/1.38.0/plotly-basic.js"></script>
+    plotly.offline.plot(fig, data, include_plotlyjs=False, filename='%s.html' % fn)
 
 
 def parse():

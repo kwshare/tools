@@ -25,7 +25,7 @@ def draw(x, y, fn):
 
     fig = go.Figure(data=data, layout=layout)
     # not include js
-    plotly.offline.plot(fig, data, include_plotlyjs=False, filename='%s.html' % fn,auto_open = False)
+    plotly.offline.plot(fig, data, include_plotlyjs=False, filename='%s.html' % fn, auto_open=False)
     # add js here.
     with open('%s.html' % fn, 'r+')as f:
         f.seek(36)

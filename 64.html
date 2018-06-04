@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>土豆不好吃 - Remember me</title>
+    <meta charset="utf-8"/>
+    <link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#757575">
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+    <script src="https://cdn.bootcss.com/mouse0270-bootstrap-notify/3.1.7/bootstrap-notify.min.js"></script>
+
+</head>
+
+<body style="text-align: center;background-color: #890604">
+
+
+<h2 style="color: #FFFFFF">hmmm...</h2>
+
+<h2 style="color: #FFFFFF">对，今天哪里都什么没有发生。</h2>
+<h1><a style="color: #890640;" onclick="errorMesg()">真的么</a></h1>
+<br>
+
+<h2 style="color: #FFFFFF">WAR IS PEACE<br>
+    FREEDOM IS SLAVERY<br>
+    IGNORANCE IS STRENGTH</h2>
+<h1 style="color: #FFFFFF">战争即和平 自由即奴役 无知即力量</h1>
+
+<h2><a style="color: #FFFFFF;" href="https://zh.wikipedia.org/zh/%E4%B8%80%E4%B9%9D%E5%85%AB%E5%9B%9B">乔治·奥威尔 《1984》 </a></h2>
+</body>
+
+<script>
+    function errorMesg(mess) {
+        $.notify({
+            title: '<strong>人们不会忘记</strong><br>',
+            message: "有人想让别人认为什么都没有发生，尽管这不是真相。<br />" +
+            "<a class='white-text' href='https://zh.wikipedia.org/wiki/%E5%85%AD%E5%9B%9B%E4%BA%8B%E4%BB%B6'>但是，所谓的真相，一直在路上。</a><br />就酱，别忘了各位"
+        }, {
+            type: 'danger'
+        });
+    }
+
+</script>
+</html>
