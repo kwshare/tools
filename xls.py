@@ -98,8 +98,6 @@ class InsertColumn:
                     except ValueError:
                         pass
 
-        self.write_wb.save(self.__write_file)
-
     def __insert_col_new(self, size):
         for i in self.read_ws.rows:
             for v in i:
@@ -118,9 +116,6 @@ class InsertColumn:
         for merge in self.read_ws.merged_cells.ranges:
             self.__style_range(self.write_ws, self.__move_right(merge.coord, size), border=self.__border,
                                alignment=self.__al)
-
-        # save the file
-        self.write_wb.save(self.__write_file)
 
     @staticmethod
     def __get_alpha(s):
@@ -193,10 +188,19 @@ class InsertColumn:
                 for _c in row:
                     _c.fill = fill
 
+    def save(self):
+
+        self.write_wb.save(self.__write_file)
+
 
 def main():
-    c = InsertColumn('test.xls', 'sample.xls')
+    c = InsertColumn('test.xlsx', 'new.xlsx')
     c.insert_col(2)
+    c.save()
+
+    c = InsertColumn('test.xls', 'old.xls')
+    c.insert_col(2)
+    c.save()
 
 
 if __name__ == '__main__':
