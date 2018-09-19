@@ -19,6 +19,7 @@ from xlutils.filter import process, XLRDReader, XLWTWriter
 
 
 class InsertColumn:
+
     def __init__(self, read_file, write_file):
         if 'xlsx' not in read_file:
             self.__old = True
@@ -60,6 +61,12 @@ class InsertColumn:
             self.write_wb.close()
 
     def __generate_style(self, x, y):
+        """
+        generate style to use for xlwt
+        :param x: coordinate x, start from 0
+        :param y: coordinate y, start from 0
+        :return: saved_style
+        """
         xf_index = self.read_ws.cell_xf_index(x, y)
         saved_style = self.__outStyle[xf_index]
         return saved_style
@@ -71,21 +78,25 @@ class InsertColumn:
         return w.style_list
 
     def insert_col(self, size):
+        """
+        insert column specified by size
+        :param size: column size
+        :return: None
+        """
         if self.__old:
             self.__insert_col_old(size)
         else:
             self.__insert_col_new(size)
 
     def __insert_col_old(self, size):
-
         for (rlow, rhigh, clow, chigh) in self.read_ws.merged_cells:
-            # 第二个和第四个参数要减1
+            # 2nd & 4th parameter have to -1
             self.write_ws.write_merge(rlow, rhigh - 1, clow + size,
                                       chigh - 1 + size, self.read_ws.cell(rlow, clow).value)
 
         for i in range(self.__nrows):
             for j in range(self.__ncols):
-                # 尝试着能否在这里复制样式
+                # copy style and value
                 if self.read_ws.cell(i, j).value:
                     self.write_ws.write(i, j + size, self.read_ws.cell(i, j).value,
                                         style=self.__generate_style(i, j))
@@ -103,7 +114,7 @@ class InsertColumn:
             for v in i:
                 coord = '%s%s' % (self.__twenty_six(self.__get_alpha(v.coordinate), size),
                                   self.__get_int(v.coordinate))
-                # fill border and everything
+                # copy fill border and everything
                 self.write_ws[coord].fill = copy(v.fill)
                 self.write_ws[coord].font = copy(v.font)
                 self.write_ws[coord].border = copy(v.border)
@@ -112,7 +123,7 @@ class InsertColumn:
                 elif isinstance(v.value, long):
                     self.write_ws[coord] = v.value
 
-        # applying styles
+        # applying merge cells
         for merge in self.read_ws.merged_cells.ranges:
             self.__style_range(self.write_ws, self.__move_right(merge.coord, size), border=self.__border,
                                alignment=self.__al)
@@ -127,14 +138,23 @@ class InsertColumn:
         return re.findall("\d+", s)[0]
 
     def __twenty_six(self, char, size):
-        # 把坐标移动size个单位
+        """
+        process Excel alphabetic coordinate
+        :param char: AB
+        :param size: move size
+        :return: new coordinate, AC
+        """
         # list vs [{k:v},{v:k}] almost the same performance under 676 items.
         index = self.__table.index(char)
         return self.__table[index + size]
 
     def __move_right(self, coord, size):
-        # A1:C2
-        # 左半部分 右半部分
+        """
+        move coordinate column position
+        :param coord: `A1:C2`
+        :param size: move size, such as 2
+        :return: C1:F2
+        """
         left = coord.split(':')[0]
         right = coord.split(':')[1]
 
@@ -189,7 +209,6 @@ class InsertColumn:
                     _c.fill = fill
 
     def save(self):
-
         self.write_wb.save(self.__write_file)
 
 
