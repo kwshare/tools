@@ -1,26 +1,37 @@
-#!/bin/bash
-echo ***********`date`  backup is staring************ >>/home/wwwlogs/backup.log
-#Benny
-mysqldump -u root -p wordpress --password=Y311 > /home/wwwroot/www.bennythink.com/db_backup/`date +%Y%m%d`.sql
-tar -jcpf /home/wwwbackup/`date +%Y%m%d`_benny.tar.bz2 /home/wwwroot/www.bennythink.com/ --exclude=/home/wwwroot/www.bennythink.com/phpmyadmin >/dev/null 2>&1
-#love
-mysqldump -u root -p hi --password=Y311 > /home/wwwroot/www.tougetu.com/db_backup/`date +%Y%m%d`.sql
-tar -jcpf /home/wwwbackup/`date +%Y%m%d`_moon.tar.bz2 /home/wwwroot/www.tougetu.com/ >/dev/null 2>&1
+#!/usr/bin/env bash
+echo "----------Backup log on `date`----------">>/home/wwwlogs/backup.log
 
-#using qshell
-rm -r /root/.qshell
-qshell qupload /home/qiniu/backup.json >>/home/wwwlogs/backup.log
-echo 'qiniu upload succeed'>>/home/wwwlogs/backup.log
-#using cos
-cd /home/cos && bash start_cos_sync.sh >>/home/wwwlogs/backup.log
-echo 'cos upload succeed'>>/home/wwwlogs/backup.log
-#using Google Drive
-grive -up /home/wwwbackup >>/home/wwwlogs/backup.log
-#delete files
-rm /home/wwwroot/www.tougetu.com/db_backup/*
-rm /home/wwwroot/www.bennythink.com/db_backup/*
-rm /home/wwwbackup/*
+# create tar
+echo "* `date` Creating tar...">>/home/wwwlogs/backup.log
+mysqldump -u root -p wordpress --password=pass \
+--ignore-table=wordpress.wp_slim_stats_archive --ignore-table=wordpress.wp_slim_stats\
+> /home/wwwroot/www.bennythink.com/db_backup/`date +%Y%m%d`.sql
+tar -jcpf /home/wwwbackup/`date +%Y%m%d`.tar.bz2 /home/wwwroot/www.bennythink.com/ \
+--exclude=/home/wwwroot/www.bennythink.com/phpmyadmin >/dev/null 2>&1
 
-echo End of backup at `date` >>/home/wwwlogs/backup.log
-echo '*****************************************' >>/home/wwwlogs/backup.log
+# dd if=/dev/zero of=/home/wwwbackup/test bs=1M count=32
 
+# qiniu
+echo "* `date` Uploading to qiniu...">>/home/wwwlogs/backup.log
+# blame me(?_?)
+rm -r /root/.qshell/qupload/
+/opt/bin/qshell qupload2 --src-dir=/home/wwwbackup/ -bucket=backup 
+echo "* `date` Upload complete.">>/home/wwwlogs/backup.log
+
+# qcloud
+echo "* `date` Uploading to Tencent...">>/home/wwwlogs/backup.log
+/usr/local/bin/coscmd upload /home/wwwbackup/*  / 
+echo "* `date` Upload complete.">>/home/wwwlogs/backup.log
+
+# Google Drive
+echo "* `date` Uploading to Google Drive...">>/home/wwwlogs/backup.log
+/opt/bin/gdrive upload /home/wwwbackup/`date +%Y%m%d`.tar.bz2 
+echo "* `date` Upload complete.">>/home/wwwlogs/backup.log
+
+# delete files
+echo "* `date` Deleting files...">>/home/wwwlogs/backup.log
+rm -rf /home/wwwbackup/*
+rm -rf /home/wwwroot/www.bennythink.com/db_backup/*
+
+echo "----------Backup complete on `date`----------">>/home/wwwlogs/backup.log
+echo >>/home/wwwlogs/backup.log
