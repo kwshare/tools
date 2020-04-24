@@ -3,5 +3,6 @@
 --with-http_v2_module --with-http_ssl_module --with-http_gzip_static_module \
 --with-http_stub_status_module --with-http_sub_module --with-stream \
 --with-stream_ssl_module \
---with-compat
+--with-compat \
+--with-http_realip_module
 
