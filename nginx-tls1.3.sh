@@ -11,6 +11,8 @@ git clone https://github.com/openresty/srcache-nginx-module
 git clone https://github.com/openresty/redis2-nginx-module
 git clone https://github.com/openresty/set-misc-nginx-module
 git clone https://github.com/vision5/ngx_devel_kit
+git clone https://github.com/openresty/headers-more-nginx-module
+git clone https://github.com/openresty/echo-nginx-module
 
 wget https://people.freebsd.org/~osa/ngx_http_redis-0.3.9.tar.gz
 tar xf ngx_http_redis-0.3.9.tar.gz
@@ -30,7 +32,9 @@ if [ $? -eq 0 ];then
         --add-module=../redis2-nginx-module \
         --add-module=../ngx_http_redis-0.3.9 \
         --add-module=../ngx_devel_kit \
-        --add-module=../set-misc-nginx-module
+        --add-module=../set-misc-nginx-module \
+        --add-module=../headers-more-nginx-module \
+        --add-module=../echo-nginx-module
   else
             git clone https://github.com/openssl/openssl
 
@@ -45,7 +49,9 @@ if [ $? -eq 0 ];then
         --add-module=../redis2-nginx-module \
         --add-module=../ngx_http_redis-0.3.9 \
         --add-module=../ngx_devel_kit \
-        --add-module=../set-misc-nginx-module
+        --add-module=../set-misc-nginx-module \
+        --add-module=../headers-more-nginx-module \
+        --add-module=../echo-nginx-module
 fi
 
 make && make install
