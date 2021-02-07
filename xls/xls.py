@@ -3,6 +3,8 @@
 # 2018/9/13
 # package required: openpyxl xlrd xlwt xlutils
 
+# https://dmesg.app/python-excel-add-column.html
+
 __author__ = 'Benny <benny.think@gmail.com>'
 
 import itertools
